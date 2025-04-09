@@ -1,24 +1,33 @@
-name: Build CI/CD
+test:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-on:
-  push:
-    branches:
-      - main
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.22'
 
-jobs:
-  compile:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Install dependencies
+      run: go mod download
 
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.22'
+    # TODO 01 - Add a step to run tests
+    - name: Run tests
+      run: go test ./...
 
-      - name: Install dependencies
-        run: go mod download
+# TODO 02 - Make sure that this job is run before `compile`
+compile:
+  runs-on: ubuntu-latest
+  needs: test
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Compile binary
-        run: go build -o myapp
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.22'
+
+    - name: Build binary
+      run: go build -o myapp
