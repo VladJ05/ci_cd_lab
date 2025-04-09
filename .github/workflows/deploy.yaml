@@ -1,4 +1,3 @@
-# .github/workflows/deploy.yaml
 name: Build CI/CD
 
 # Trigger the workflow on a commit push to the `main` branch
