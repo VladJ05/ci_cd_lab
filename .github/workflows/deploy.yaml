@@ -1,4 +1,4 @@
-name: Build CI/CD
+\name: Build CI/CD
 
 # Trigger the workflow on a commit push to the `main` branch
 on:
@@ -78,8 +78,8 @@ jobs:
 
       # Step 4: Build the Docker image and tag it with the repository name and 'latest'
       - name: Build Docker image
-        run: docker build -t ghcr.io/${{ github.repository }}:latest .
+        run: docker build -t ghcr.io/vladj05/ci_cd_lab:latest .
 
       # Step 5: Push the Docker image to GitHub Container Registry
       - name: Push Docker image
-        run: docker push ghcr.io/${{ github.repository }}:latest
+        run: docker push ghcr.io/vladj05/ci_cd_lab:latest
